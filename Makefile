@@ -1,4 +1,2 @@
-hello:
-	echo "hello world"
-req:
-	pip freeze > requirements.txt
+up:
+	docker-compose up -d

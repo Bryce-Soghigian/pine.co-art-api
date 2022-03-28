@@ -13,9 +13,16 @@ class PopulateTrainingData(DagsterRunner):
 
     @op
     def _initialize_bucket_if_not_exist(self):
+        """
+        Method for managing the creation of the gan training data bucket.
+        """
         pass
 
-    
+    @op
+    def _add_abscract_art_gallery(self):
+        """
+        """
+        pass
     
     @job
     def populate_training_data(self,):

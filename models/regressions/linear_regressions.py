@@ -30,7 +30,7 @@ class PytorchLinearRegression:
     def generate_predictions(self, inputs):
         return self.model(inputs)
     
-    def train(self, num_epochs):
+    def __call__(self, num_epochs):
 
         for epoch in range(num_epochs):
             for xb, yb in self.data_loader:
@@ -49,5 +49,3 @@ class PytorchLinearRegression:
                 if is_mod_of_x(epoch, x=10):
                     log.info(f'Epoch:{epoch}, Loss: {loss.item()}')
 
-class LinearRegression:
-    pass

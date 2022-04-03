@@ -1,4 +1,5 @@
 import logging as log
+from numpy import int0
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -48,4 +49,9 @@ class PytorchLinearRegression:
 
                 if is_mod_of_x(epoch, x=10):
                     log.info(f'Epoch:{epoch}, Loss: {loss.item()}')
+
+
+
+
+
 

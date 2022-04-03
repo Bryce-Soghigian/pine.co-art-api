@@ -11,5 +11,5 @@ class CleanTrainingData(DagsterRunner):
     """
 
     @job
-    def clean_training_data(self):
+    def clean_training_data():
         pass

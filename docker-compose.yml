@@ -7,9 +7,11 @@ services:
       MINIO_ACCESS_KEY: '${MINIO_ACCESS_KEY}'
       MINIO_SECRET_KEY: '${MINIO_SECRET_KEY}'
     ports:
-      - "9000:9000"
+      - 9000:9000
     volumes:
       - ./.volumes/minio:/data
+    networks:
+      - soghigian-net
     command: server /data
   db:
     environment:
@@ -19,6 +21,8 @@ services:
       - './data/db:/var/lib/postgresql/data'
     ports:
       - "5432:5432"
+    networks:
+      - soghigian-net
 
   web:
     build: .
@@ -35,10 +39,11 @@ services:
       - MINIO_ACCESS_KEY=${MINIO_ACCESS_KEY}
       - MINIO_SECRET_KEY=${MINIO_SECRET_KEY}
       - MINIO_HOST=${MINIO_HOST}
-
+    networks:
+      - soghigian-net
 version: '3.9'
 
 networks:
-  default:
+  soghigian-net:
     external:
       name: soghigian-net

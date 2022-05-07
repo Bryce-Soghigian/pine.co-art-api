@@ -7,17 +7,23 @@ services:
       MINIO_ACCESS_KEY: '${MINIO_ACCESS_KEY}'
       MINIO_SECRET_KEY: '${MINIO_SECRET_KEY}'
     ports:
-      - "9000:9000"
+      - 9000:9000
     volumes:
       - ./.volumes/minio:/data
+    networks:
+      - soghigian-net
     command: server /data
-
   db:
     environment:
       POSTGRES_PASSWORD: '${PG_PASSWORD}'
     image: postgres
     volumes:
       - './data/db:/var/lib/postgresql/data'
+    ports:
+      - "5432:5432"
+    networks:
+      - soghigian-net
+
   web:
     build: .
     command: 'python manage.py runserver 0.0.0.0:8000'
@@ -28,5 +34,16 @@ services:
       - '8000:8000'
     volumes:
       - '.:/code'
+    environment:
+      - PG_PASSWORD=${PG_PASSWORD}
+      - MINIO_ACCESS_KEY=${MINIO_ACCESS_KEY}
+      - MINIO_SECRET_KEY=${MINIO_SECRET_KEY}
+      - MINIO_HOST=${MINIO_HOST}
+    networks:
+      - soghigian-net
 version: '3.9'
 
+networks:
+  soghigian-net:
+    external:
+      name: soghigian-net

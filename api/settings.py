@@ -13,6 +13,8 @@ import os
 import uuid
 from pathlib import Path
 
+from common.utils import verify_env_vars
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -38,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'tasks.apps.TasksConfig'
 ]
 
 MIDDLEWARE = [
@@ -73,6 +77,7 @@ WSGI_APPLICATION = 'api.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+verify_env_vars(['PG_PASSWORD'])
 DATABASES = {
     'default': {
         "ENGINE": "django.db.backends.postgresql",
